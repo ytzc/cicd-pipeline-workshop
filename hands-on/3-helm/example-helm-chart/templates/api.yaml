@@ -22,6 +22,15 @@ spec:
           value: "6379"
         ports:
         - containerPort: 5000
+        livenessProbe:
+          tcpSocket: 
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+
       imagePullSecrets:
       - name: {{ .Values.registry.secretName }} #jerry-registry
 ---

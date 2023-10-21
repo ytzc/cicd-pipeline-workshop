@@ -20,6 +20,18 @@ spec:
           - mountPath: /etc/nginx/
             name: nginx-conf
             readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+            httpHeaders:
+            # - name: Custom-Header
+            #   value: Awesome
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
       volumes:
         - configMap:
             items:

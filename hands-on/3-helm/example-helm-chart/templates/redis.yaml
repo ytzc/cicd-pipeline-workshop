@@ -17,6 +17,21 @@ spec:
         image: {{ .Values.redis.image }} #redis:latest
         ports:
         - containerPort: 6379
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli 
+            - set
+            - testkey
+            - testvalue
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 1
+
+
+
 ---
 apiVersion: v1
 kind: Service
