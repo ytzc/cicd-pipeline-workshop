@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: python
-        image: {{ .Values.api.image }} #registry.srcmesh.dev/workshop/jerry:0.0.1 #python:latest
+        image: registry.srcmesh.dev/workshop/jerry:0.0.1 #{{ .Values.api.image }}
         env:
         - name: REDIS_HOST
           value: redis-svc
@@ -57,7 +57,7 @@ spec:
             cpu: "200m"
 
       imagePullSecrets:
-      - name: {{ .Values.registry.secretName }} #jerry-registry
+      - name: jerry-registry #{{ .Values.registry.secretName }}
 ---
 apiVersion: v1
 kind: Service
@@ -67,6 +67,6 @@ spec:
   selector:
     app: python
   ports:
-  - port: {{ .Values.api.svcPort }} #5000
+  - port: 5000 #{{ .Values.api.svcPort }}
     targetPort: 5000
   type: ClusterIP
