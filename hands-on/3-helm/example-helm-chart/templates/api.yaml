@@ -23,7 +23,7 @@ kind: Deployment
 metadata:
   name: python
 spec:
-  replicas: {{ .Values.api.replicas }}
+  # replicas: {{ .Values.api.replicas }}
   selector:
     matchLabels:
       app: python
