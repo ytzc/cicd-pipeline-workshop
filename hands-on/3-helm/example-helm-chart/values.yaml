@@ -1,2 +1,21 @@
+
+
+registry:
+  secretName: jerry-registry
+
+api:
+  replicas: "1"
+  image: registry.srcmesh.dev/workshop/jerry:0.0.1
+  svcPort: "5000"
+
+
 nginx:
+  replicas: "1"
   image: nginx:latest
+  svcPort: "80"
+
+redis:
+  replicas: "1"
+  image: redis:latest
+  svcPort: "6379"
+
