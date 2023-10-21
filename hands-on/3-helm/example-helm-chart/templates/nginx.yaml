@@ -1,6 +1,5 @@
-
 apiVersion: autoscaling/v2
-kind: HorizonTalPodAutoscaler
+kind: HorizontalPodAutoscaler
 metadata:
   name: nginx-hpa
 spec:
@@ -12,11 +11,11 @@ spec:
   maxReplicas: 3
   metrics:
   - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 30
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 30
 
 ---
 apiVersion: apps/v1
@@ -53,6 +52,11 @@ spec:
           timeoutSeconds: 1
           successThreshold: 1
           failureThreshold: 1
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "200m"
       volumes:
         - configMap:
             items:
